@@ -1,15 +1,14 @@
 import { API_BASE_URL } from './endpoints.js'; 
 
 // Define clockIn and clockOut functions
-export async function clockIn(jwtToken, timestamp) {
+export async function clockIn(jwtToken) {
     try {
-      const response = await fetch(`${API_BASE_URL}`, {
+      const response = await fetch(`${API_BASE_URL}/clock-in`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${jwtToken}`,
         },
-        body: JSON.stringify({ timestamp }),
       });
       if (!response.ok) {
         throw new Error('Clock in failed:', response.statusText);
@@ -20,7 +19,7 @@ export async function clockIn(jwtToken, timestamp) {
     }
   }
   
-  export async function clockOut(jwtToken, timestamp) {
+  export async function clockOut(jwtToken) {
     try {
       const response = await fetch(`${API_BASE_URL}/clock-out`, {
         method: 'POST',
@@ -28,7 +27,6 @@ export async function clockIn(jwtToken, timestamp) {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${jwtToken}`,
         },
-        body: JSON.stringify({ timestamp }),
       });
       if (!response.ok) {
         throw new Error('Clock out failed:', response.statusText);
